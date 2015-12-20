@@ -30,6 +30,32 @@
             border:2px solid white;
         }
     </style>
+
+    <script>
+
+        
+        $(document).ready(function () {
+
+            $.getJSON('https://api.twitch.tv/kraken/streams?callback=?', function (data) {
+                //alert(data);
+                //alert(data["_total"]);
+
+                var streamsList = data["streams"];
+                var trHTML = '';
+                //alert(foreCastDataList);
+                for (var i = 0; i < streamsList.length; i++) {
+                    trHTML += '<tr><td>' + streamsList[i]["channel"]["display_name"]
+                        + '</td><td>' + streamsList[i]["channel"]["url"]                       
+                    + '</td></tr>';
+                }
+                
+                $("#channel_list").append(trHTML);
+
+
+            });
+
+        });
+    </script>
 </head>
 <body>
     <div class="container-fluid">
@@ -65,6 +91,13 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div  class="center-block col-md-4 text-center" style="float: none; background-color:#FF6347">                    
+                    <table id="channel_list" class="table table-responsive table-bordered table-hover table-striped small">                        
+                    </table>
                 </div>
             </div>
 
